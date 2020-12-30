@@ -1,5 +1,6 @@
 """
-Remove Duplicates: Write code to remove duplicates from an unsorted linked list. FOLLOW UP
+Remove Duplicates: Write code to remove duplicates from an unsorted linked list.
+FOLLOW UP
 How would you solve this problem if a temporary buffer is not allowed?
 """
 from .link import Link
@@ -24,15 +25,20 @@ def removeDuplicatesInSortedList(head: Link) -> Link:
 
 
 def removeDuplicatedInUnSortedList(head: Link) -> Link:
-    referenceMarker = head
-    while referenceMarker is not None:
-        previousMarker = referenceMarker
-        nextMarker = referenceMarker.nextLink
+    distinctElements = set()
+    marker = head
+    while marker is not None:
+        distinctElements.add(marker.info)
+        marker = marker.nextLink
 
-        while previousMarker.nextLink is not None:
-            if referenceMarker.info == previousMarker.nextLink.info:
-                previousMarker.nextLink = previousMarker.nextLink.nextLink
-            previousMarker = previousMarker.nextLink
+    newHead = None
+    currentMarker = newHead
+    for element in distinctElements:
+        newLink = Link(element)
+        if currentMarker:
+            currentMarker.nextLink = newLink
+            currentMarker = newLink
+        else:
+            newHead = currentMarker = newLink
 
-        referenceMarker = referenceMarker.nextLink
-    return head
+    return newHead

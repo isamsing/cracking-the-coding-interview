@@ -60,7 +60,7 @@ class Test(TestCase):
         sixthLink.nextLink = seventhLink
 
         expectedHead = removeDuplicatedInUnSortedList(testHead)
-        self.assertEqual(self.linkedListToArray(expectedHead), [1, 2, 3])
+        self.assertEqual(self.linkedListToArray(expectedHead), [2, 3, 1])
 
     def testRemoveDuplicatesInSortedList(self):
         testHead = Link(1)

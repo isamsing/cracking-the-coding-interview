@@ -24,21 +24,34 @@ def removeDuplicatesInSortedList(head: Link) -> Link:
     return head
 
 
+# def removeDuplicatedInUnSortedList(head: Link) -> Link:
+#     distinctElements = set()
+#     marker = head
+#     while marker is not None:
+#         distinctElements.add(marker.info)
+#         marker = marker.nextLink
+#
+#     newHead = None
+#     currentMarker = newHead
+#     for element in distinctElements:
+#         newLink = Link(element)
+#         if currentMarker:
+#             currentMarker.nextLink = newLink
+#             currentMarker = newLink
+#         else:
+#             newHead = currentMarker = newLink
+#
+#     return newHead
+
 def removeDuplicatedInUnSortedList(head: Link) -> Link:
-    distinctElements = set()
-    marker = head
-    while marker is not None:
-        distinctElements.add(marker.info)
-        marker = marker.nextLink
+    current = head
+    while current is not None:
+        runner = current
+        while runner.nextLink is not None:
+            if runner.nextLink.info == current.info:
+                runner.nextLink = runner.nextLink.nextLink
+            else:
+                runner = runner.nextLink
+        current = current.nextLink
+    return head
 
-    newHead = None
-    currentMarker = newHead
-    for element in distinctElements:
-        newLink = Link(element)
-        if currentMarker:
-            currentMarker.nextLink = newLink
-            currentMarker = newLink
-        else:
-            newHead = currentMarker = newLink
-
-    return newHead

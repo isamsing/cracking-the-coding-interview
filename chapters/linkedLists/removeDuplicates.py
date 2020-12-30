@@ -44,14 +44,13 @@ def removeDuplicatesInSortedList(head: Link) -> Link:
 #     return newHead
 
 def removeDuplicatedInUnSortedList(head: Link) -> Link:
-    current = head
-    while current is not None:
-        runner = current
-        while runner.nextLink is not None:
-            if runner.nextLink.info == current.info:
-                runner.nextLink = runner.nextLink.nextLink
+    referenceMarker = head
+    while referenceMarker is not None:
+        currentMarker = referenceMarker
+        while currentMarker.nextLink is not None:
+            if currentMarker.nextLink.info == referenceMarker.info:
+                currentMarker.nextLink = currentMarker.nextLink.nextLink
             else:
-                runner = runner.nextLink
-        current = current.nextLink
+                currentMarker = currentMarker.nextLink
+        referenceMarker = referenceMarker.nextLink
     return head
-

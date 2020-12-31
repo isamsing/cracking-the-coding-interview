@@ -9,5 +9,15 @@ Result: nothing is returned, but the new linked list looks like a - >b- >d - >e-
 from .link import Link
 
 
-def deleteMiddleNode(head: Link) -> Link:
-    pass
+def deleteMiddleNode(link: Link) -> None:
+    firstMarker = secondMarker = link
+    skipper = 1
+    while firstMarker.nextLink is not None:
+        firstMarker.info = firstMarker.nextLink.info
+        if skipper > 0:
+            skipper -= 1
+        else:
+            secondMarker = secondMarker.nextLink
+        firstMarker = firstMarker.nextLink
+
+    secondMarker.nextLink = None

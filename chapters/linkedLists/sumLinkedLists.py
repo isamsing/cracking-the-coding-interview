@@ -12,4 +12,45 @@ from chapters.linkedLists.link import Link
 
 
 def sumLinkedLists(linkedListOneHead: Link, linkedListTwoHead: Link) -> Link:
-    pass
+    markerListOne = linkedListOneHead
+    markerListTwo = linkedListTwoHead
+
+    resultMarker = None
+
+    carry = 0
+    while markerListTwo is not None or markerListTwo is not None:
+        addedSum = (markerListOne.info + markerListTwo.info + carry)
+        carry, resultMarker = getCarry(addedSum, resultMarker)
+
+        markerListOne = markerListOne.nextLink
+        markerListTwo = markerListTwo.nextLink
+
+    if markerListOne is not None:
+        while markerListOne is not None:
+            addedSum = (markerListOne.info + carry)
+            carry, resultMarker = getCarry(addedSum, resultMarker)
+            markerListOne = markerListOne.nextLink
+
+    if markerListTwo is not None:
+        while markerListTwo is not None:
+            addedSum = (markerListOne.info + carry)
+            carry, resultMarker = getCarry(addedSum, resultMarker)
+            markerListTwo = markerListTwo.nextLink
+
+    if carry > 0:
+        carryLink = Link(carry)
+        resultMarker.nextLink = carryLink
+
+    return resultMarker
+
+
+def getCarry(addedSum: int, resultMarker: Link) -> (int, Link):
+    carry = addedSum // 10
+    addedValue = addedSum % 10
+    if resultMarker is None:
+        resultMarker = Link(addedValue)
+    else:
+        newLink = Link(addedValue)
+        newLink.nextLink = resultMarker
+        resultMarker = newLink
+    return carry, resultMarker

@@ -18,17 +18,3 @@ def routeBetweenTwoNodes(source: Node, target: Node) -> bool:
         for child in source.children:
             results.append(routeBetweenTwoNodes(child, target))
         return reduce(lambda resultOne, resultTwo: resultOne or resultTwo, results)
-
-
-if __name__ == '__main__':
-    source = Node(1)
-    two = Node(2)
-    three = Node(3)
-    four = Node(4)
-    target = Node(5)
-
-    source.children = [two, three]
-    two.children = [four]
-    four.children = [target]
-
-    print(routeBetweenTwoNodes(source, source))

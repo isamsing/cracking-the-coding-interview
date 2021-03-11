@@ -7,12 +7,10 @@ from functools import reduce
 
 
 def routeBetweenTwoNodes(source: Node, target: Node) -> bool:
-    if not source or not target:
+    if not source or not target or not source.children:
         return False
     elif source == target:
         return True
-    elif not source.children:
-        return False
     else:
         results = []
         for child in source.children:

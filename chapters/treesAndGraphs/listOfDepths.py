@@ -11,6 +11,7 @@ def listOfDepths(root: BinaryLeaf):
     depth = 0
     queue = SimpleQueue()
     queue.put((depth, root))
+    # Use linkedList instead of lists
     linkedLists = {}
 
     while not queue.empty():

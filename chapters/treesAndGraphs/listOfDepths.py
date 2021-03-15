@@ -3,7 +3,7 @@ List of Depths: Given a binary tree, design an algorithm which creates a linked 
 (e.g., if you have a tree with depth 0, you'll have 0 linked lists).
 """
 
-from chapters.dataStructures.binaryLeaf import BinaryLeaf
+from chapters.dataStructures.trees.binaryLeaf import BinaryLeaf
 from queue import SimpleQueue
 
 

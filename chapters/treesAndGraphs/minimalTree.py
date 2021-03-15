@@ -2,7 +2,7 @@
 Minimal Tree: Given a sorted (increasing order) array with unique integer elements, write an algorithm
 to create a binary search tree with minimal height.
 """
-from chapters.dataStructures.binaryLeaf import BinaryLeaf
+from chapters.dataStructures.trees.binaryLeaf import BinaryLeaf
 from typing import List, Optional
 from math import floor
 

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from chapters.dataStructures.binaryLeaf import BinaryLeaf
+from chapters.dataStructures.trees.binaryLeaf import BinaryLeaf
 from chapters.treesAndGraphs.isBinarySearchTree import isBinarySearchTree
 
 

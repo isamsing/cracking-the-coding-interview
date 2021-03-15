@@ -1,7 +1,7 @@
 """
 Validate BST: Implement a function to check if a binary tree is a binary search tree.
 """
-from chapters.dataStructures.binaryLeaf import BinaryLeaf
+from chapters.dataStructures.trees.binaryLeaf import BinaryLeaf
 
 
 def isBinarySearchTree(root: BinaryLeaf):

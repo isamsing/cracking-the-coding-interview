@@ -12,25 +12,38 @@ from typing import List
 
 def getInOrderSequence(root: BinaryLeaf) -> List:
     if root is None:
-        return []
+        return ["X"]
     else:
         leftResult = getInOrderSequence(root.leftChild)
         rightResult = getInOrderSequence(root.rightChild)
         return leftResult + [root.info] + rightResult
 
 
-def inOrderTraversal(root: BinaryLeaf, target: BinaryLeaf):
+def inSubTreeHelper(root: BinaryLeaf, target: BinaryLeaf):
     if root is None:
-        return None
+        return False
     else:
-        leftResult = inOrderTraversal(root.leftChild, target)
-        rightResult = inOrderTraversal(root.rightChild, target)
-
-        result = False
-        if root.info == target.info:
-            result = getInOrderSequence(root) == getInOrderSequence(target)
-        return leftResult or result or rightResult
+        leftResult = inSubTreeHelper(root.leftChild, target)
+        rightResult = inSubTreeHelper(root.rightChild, target)
+        return leftResult or (getInOrderSequence(root) == getInOrderSequence(target)) or rightResult
 
 
-def isSubTree(firstRoot: BinaryLeaf, secondRoot: BinaryLeaf):
-    return inOrderTraversal(firstRoot, secondRoot)
+def getPreOrderString(root: BinaryLeaf):
+    if root is None:
+        return "X"
+    else:
+        leftString = getPreOrderString(root.leftChild)
+        rightString = getPreOrderString(root.rightChild)
+        return f"{root.info}{leftString}{rightString}"
+
+def isSubString(firstRoot: BinaryLeaf, secondRoot: BinaryLeaf) -> bool:
+    firstString = getPreOrderString(firstRoot)
+    secondString = getPreOrderString(secondRoot)
+    return secondString in firstString
+
+def isSubTree(firstRoot: BinaryLeaf, secondRoot: BinaryLeaf, method: int = 0):
+    functions = {
+        0: isSubString,
+        1: isSubTree
+    }
+    return functions[method](firstRoot, secondRoot)

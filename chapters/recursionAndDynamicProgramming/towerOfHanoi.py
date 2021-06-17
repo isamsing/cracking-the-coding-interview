@@ -9,25 +9,32 @@ constraints:
 Write a program to move the disks from the first tower to the last using stacks.
 """
 from typing import List
-from queue import LifoQueue
 
 
 class Disk:
     def __init__(self, size):
         self.size = size
 
+    def __repr__(self):
+        return f"{self.size}"
 
-def moveDisk(fromPole: LifoQueue, toPole: LifoQueue):
-    toPole.put(fromPole.get())
+
+class Pole(List):
+    def __init__(self, name):
+        super().__init__()
+        self.name = name
 
 
-def towerOfHanoi(numberOfDisks: int, firstPole: LifoQueue, middlePole: LifoQueue, lastPole: LifoQueue):
+def towerOfHanoi(numberOfDisks: int, firstPole: Pole, lastPole: Pole, middlePole: Pole):
     if numberOfDisks == 1:
-        return
+        disk = firstPole.pop()
+        lastPole.append(disk)
+        print(f"Moved {disk.size} from {firstPole.name} to {lastPole.name}", end="\n")
+        print(f"{firstPole}:{lastPole}:{middlePole}", end="\n")
     else:
         towerOfHanoi(numberOfDisks - 1, firstPole, middlePole, lastPole)
-        moveDisk(firstPole, lastPole)
-        towerOfHanoi(numberOfDisks - 1, firstPole, lastPole, middlePole)
+        towerOfHanoi(1, firstPole, lastPole, middlePole)
+        towerOfHanoi(numberOfDisks - 1, middlePole, lastPole, firstPole)
 
 
 if __name__ == '__main__':
@@ -35,11 +42,10 @@ if __name__ == '__main__':
     twoDisk = Disk(2)
     threeDisk = Disk(3)
 
-    aPole = LifoQueue()
-    aPole.put(oneDisk)
-    aPole.put(twoDisk)
-    aPole.put(threeDisk)
-    bPole = LifoQueue()
-    cPole = LifoQueue()
+    aPole = Pole("A")
+    aPole.append(threeDisk)
+    aPole.append(twoDisk)
+    aPole.append(oneDisk)
+    bPole = Pole("B")
+    cPole = Pole("C")
     towerOfHanoi(3, aPole, bPole, cPole)
-    print(cPole)

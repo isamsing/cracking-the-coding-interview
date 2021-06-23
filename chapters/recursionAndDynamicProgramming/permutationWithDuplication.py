@@ -4,12 +4,12 @@ characters are not necessarily unique. The list of permutations should not have 
 """
 
 
-def permutationWithDuplicates(uniqueString: str):
-    if len(uniqueString) == 2:
-        return [uniqueString, uniqueString[::-1]]
+def permutationWithDuplicates(stringWithDuplicates: str):
+    if len(stringWithDuplicates) == 2:
+        return [stringWithDuplicates, stringWithDuplicates[::-1]]
     else:
-        first = uniqueString[:1]
-        subsequencePermutation = permutationWithDuplicates(uniqueString[1:])
+        first = stringWithDuplicates[:1]
+        subsequencePermutation = permutationWithDuplicates(stringWithDuplicates[1:])
         permutation = set()
         for perm in subsequencePermutation:
             positions = len(perm) + 1

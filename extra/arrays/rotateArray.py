@@ -1,11 +1,12 @@
 from typing import List, Any
 
 
-def rotateArray(arr: List[Any], num: int) -> None:
-    for _ in range(num % len(arr)):
-        arr = arr[1:] + arr[:1]
-    return arr
+def rotateArray(A: List[Any], K: int) -> list:
+    rotationIndex = K if len(A) >= K else K % len(A)
+    return A[-rotationIndex:] + A[:-rotationIndex]
 
 
 if __name__ == '__main__':
-    print(rotateArray(["h", "e", "l", "l", "o"], 62))
+    print(rotateArray(["h", "e", "l", "l", "o"], 2))
+    print(rotateArray([1, 2, 3, 4], 4))
+    print(rotateArray([], 0))

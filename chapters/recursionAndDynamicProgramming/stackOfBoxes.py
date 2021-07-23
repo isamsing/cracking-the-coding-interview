@@ -43,6 +43,23 @@ def getMaxStackHeightHelper(boxes: List[Box]):
         return maxHeight
 
 
+def getMaxStackHeightWithoutConstraint(boxes: List[Box]):
+    if not boxes:
+        return 0
+    elif len(boxes) == 1:
+        return boxes[0].height
+    else:
+        maxHeight = 0
+        for bottomBox in boxes:
+            biggerBoxes = list(filter(lambda box: box != bottomBox, boxes))
+            if biggerBoxes:
+                currentHeight = bottomBox.height + getMaxStackHeightHelper(biggerBoxes)
+            else:
+                currentHeight = bottomBox.height
+            maxHeight = max(maxHeight, currentHeight)
+        return maxHeight
+
+
 if __name__ == '__main__':
     b1 = Box(1, 1, 1)
     b2 = Box(2, 2, 2)
@@ -65,5 +82,3 @@ if __name__ == '__main__':
     b10 = Box(5, 5, 5)
     boxesFour = [b10]
     print(getMaxStackHeightHelper(boxesFour))
-
-
